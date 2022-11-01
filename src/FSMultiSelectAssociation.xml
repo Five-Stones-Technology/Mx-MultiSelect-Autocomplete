@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="five stones technology.fsmultiselectassociation.FSMultiSelectAssociation" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>FSMulti Select Association</name>
+    <description>React Multiselect dropdown populated by entity association</description>
+    <icon/>
+<properties>
+        <propertyGroup caption="General">
+            <systemProperty key="Visibility"/>
+            <property key="dataSourceOptions" type="datasource" isList="true" required="true">
+                <caption>Data source</caption>
+                <description />
+            </property>
+            <property key="titleAttr" type="attribute" dataSource="dataSourceOptions" required="true">
+                <caption>Title</caption>
+                <description>String attribute where the title is stored to be shown in the dropdown. Should be unique to be able to make a distinction between the items.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="keyAttr" type="attribute" dataSource="dataSourceOptions" required="true">
+                <caption>Key</caption>
+                <description>Attribute where the key is stored</description>
+                <attributeTypes>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                </attributeTypes>
+            </property>
+            <property key="defaultSelectedAttr" type="attribute" dataSource="dataSourceOptions" required="false">
+                <caption>Default selected</caption>
+                <description>Boolean attribute where is stored whether this option should be selected by default when loading the widget for the first time</description>
+                <attributeTypes>
+                    <attributeType name="Boolean"/>
+                </attributeTypes>
+            </property>
+            <property key="responseAttribute" type="attribute" required="true">
+                <caption>Response</caption>
+                <description>Attribute where the selected items are stored in json format ([{"title":"example1"}] for multiselect and {"title":"example1"} for single select). User needs write access on this attribute.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="onSelect" type="action" required="false">
+                <caption>On Select</caption>
+                <description>
+                    Event that is triggered when a selection is made from the drop down OR when an item was removed from the selected list
+                </description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Settings">
+            <property key="multiple" type="boolean" required="true" defaultValue="true">
+                <caption>Multi-select</caption>
+                <description>If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select</description>
+            </property>
+            <property key="searchAfterXChars" type="expression" required="true" defaultValue="0">
+                <caption>Search after X chars</caption>
+                <description>Custom search: Only execute "on input change" after X chars or more are filled in. If less chars a filled in, no options are shown and a text is shown. For every char added, the action is executed.</description>
+                <returnType type="Integer" />
+            </property>
+            <property key="searchAfterXCharsText" type="expression" required="false">
+                <caption>To few chars text</caption>
+                <description>Custom search: Text to show when to few chars are filled</description>
+                <returnType type="String" />
+            </property>
+            <property key="onInputChangeDelay" type="expression" required="true" defaultValue="500">
+                <caption>Input change delay</caption>
+                <description>Custom search: Determines how many ms to wait after the last input change to execute the action. Used to determine whether a person is still typing.</description>
+                <returnType type="Integer" />
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Behavior">
+            <property key="disableCloseOnSelect" type="boolean" required="true" defaultValue="false">
+                <caption>No close on select</caption>
+                <description>Whether or not to close the list when an item is selected. Set to true to not close the list when an item is selected.</description>
+            </property>
+            <property key="filterSelectedOptions" type="boolean" required="true" defaultValue="false">
+                <caption>Filter selected options</caption>
+                <description>Whether or not to filter the options out of the list that are already selected.</description>
+            </property>
+            <property key="limitTags" type="integer" required="true" defaultValue="0">
+                <caption>Limit Tags</caption>
+                <description>Maximum number of selected tags to show if the dropdown is closed. If more options are selected, there will be an indication how many options are selected (e.g. +2) If set to 0, there is no limit.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Layout">
+            <property key="noOptionsText" type="textTemplate" required="false">
+                <caption>No Options</caption>
+                <description>Text to show when no options found</description> 
+            </property>
+            <property key="loadingText" type="expression" required="false">
+                <caption>Loading text</caption>
+                <description>Text to show when loading</description>
+                <returnType type="String" />
+            </property>
+            <property key="placeholder" type="textTemplate" required="false">
+                <caption>Placeholder</caption>
+                <description>Default value to show as placeholder</description> 
+            </property>
+            <property key="showCheckboxes" type="boolean" required="true" defaultValue="false">
+                <caption>Checkboxes</caption>
+                <description>Whether or not to show checkboxes in front of the options.</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
