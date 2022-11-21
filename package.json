@@ -1,20 +1,20 @@
 {
-  "name": "fsmultiselectassociation",
-  "widgetName": "FSMultiSelectAssociation",
+  "name": "fsmultiselect",
+  "widgetName": "FSMultiSelect",
   "version": "1.0.0",
-  "description": "React Multiselect dropdown populated by entity association",
+  "description": "Mendix Widget wrapping the Autocomplete Component from the React Material-UI library",
   "copyright": "Five Stones Technology 2022. All rights reserved",
-  "author": "SGrover",
+  "author": "Five Stones",
   "engines": {
     "node": ">=16"
   },
   "license": "Apache-2.0",
   "config": {
-    "projectPath": "C:\\Mendix Projects\\Engagement Tracking Tool-main_2",
+    "projectPath": "C:\\Mendix Projects\\ETT-main",
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
-  "packagePath": "five stones technology",
+  "packagePath": "fivestones",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",
