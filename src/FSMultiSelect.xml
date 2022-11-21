@@ -28,56 +28,66 @@
                     <attributeType name="Long"/>
                 </attributeTypes>
             </property>
+            <property key="multiple" type="boolean" required="true" defaultValue="true">
+                <caption>Multi-select</caption>
+                <description>If set to true, multiple items can be selected. Otherwise, the widget can be used as single-select</description>
+            </property>
             <property key="defaultSelectedAttr" type="attribute" dataSource="dataSourceOptions" required="false">
                 <caption>Default selected</caption>
-                <description>Boolean attribute where is stored whether this option should be selected by default when loading the widget for the first time</description>
+                <description>Boolean attribute where is stored whether an item should be selected by default when loading the widget for the first time</description>
                 <attributeTypes>
                     <attributeType name="Boolean"/>
                 </attributeTypes>
             </property>
             <property key="responseAttribute" type="attribute" required="true">
                 <caption>Response</caption>
-                <description>Attribute where the selected items are stored in json format ([{"title":"example1"}] for multiselect and {"title":"example1"} for single select). User needs write access on this attribute.</description>
+                <description>Attribute where the selected items are stored in json format ([{"title":"example1"}]. User needs write access on this attribute</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
-            <property key="onChange" type="action" required="false">
-                <caption>On Select</caption>
-                <description>
-                    Event that is triggered when a selection is made from the drop down OR when an item was removed from the selected list
-                </description>
-            </property>
-                        <property key="refreshAttribute" type="attribute" required="false">
+            <property key="refreshAttribute" type="attribute" required="false">
                 <caption>Refresh</caption>
-                <description>Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got write access. Widget will only be reset when the context object is refreshed.</description>
+                <description>Set to true to refresh the widget back to the default values, widget will set the value back to false. Make sure the user has got write access. Widget will only be reset when the context object is refreshed</description>
                 <attributeTypes>
                     <attributeType name="Boolean"/>
                 </attributeTypes>
             </property>
         </propertyGroup>
-        <propertyGroup caption="Settings">
-            <property key="multiple" type="boolean" required="true" defaultValue="true">
-                <caption>Multi-select</caption>
-                <description>If set to true, multiple options can be selected. Otherwise, the widget can be used as single-select</description>
+        <propertyGroup caption="Events">
+            <property key="onChange" type="action" required="false">
+                <caption>On Select</caption>
+                <description>Event that is triggered when a selection is made from the drop down OR when an item was removed from the selected list</description>
+            </property>
+            <property key="onOpen" type="action" required="false">
+                <caption>On Open</caption>
+                <description>Event that is triggered when the input is focused and the dropdown list appears</description>
+            </property>
+            <property key="onClose" type="action" required="false">
+                <caption>On Close</caption>
+                <description>Event that is triggered on blur of the input. Can occur after a selection if the "Do NOT close on select" property is set to false. Will NOT occur after the "On Save" event to prevent redundant events</description>
+            </property>
+            <property key="onSave" type="action" required="false">
+                <caption>On Save</caption>
+                <description>Event that is triggered when the "Save" button at bottom of the dropdown is selected. This is only present when "Multi-Select" is set to true and there is the ability to choose multiple items</description>
             </property>
         </propertyGroup>
         <propertyGroup caption="Behavior">
             <property key="disableCloseOnSelect" type="boolean" required="true" defaultValue="false">
-                <caption>No close on select</caption>
-                <description>Whether or not to close the list when an item is selected. Set to true to not close the list when an item is selected.</description>
+                <caption>Do NOT close on select</caption>
+                <description>Whether or not to close the list when an item is selected. If true, the dropdown will not close when a selection is made</description>
             </property>
             <property key="filterSelectedOptions" type="boolean" required="true" defaultValue="false">
                 <caption>Filter selected options</caption>
-                <description>Whether or not to filter the options out of the list that are already selected.</description>
+                <description>Whether or not to filter the options out of the list that are already selected</description>
             </property>
             <property key="showCheckboxes" type="boolean" required="true" defaultValue="false">
                 <caption>Checkboxes</caption>
-                <description>Whether or not to show checkboxes in to the left of the options.</description>
+                <description>Whether or not to show checkboxes in to the left of the options</description>
             </property>
             <property key="limitTags" type="integer" required="true" defaultValue="1">
                 <caption>Limit Tags</caption>
-                <description>Maximum number of selected tags to show if the dropdown is closed. If more options are selected, there will be an indication how many options are selected (e.g. +2) If set to 0, there is no limit.</description>
+                <description>Maximum number of selected tags to show if the dropdown is closed. If more options are selected, there will be an indication how many options are selected (e.g. +2) If set to 0, there is no limit</description>
             </property>
         </propertyGroup>
         <propertyGroup caption="Layout">

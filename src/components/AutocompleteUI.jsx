@@ -19,6 +19,8 @@ export class AutocompleteUI extends Component {
               value = {this.props.value}
               getOptionLabel = {option => option.title}
               onChange = {this.props.onChange}
+              onClose = {this.props.onClose}
+              onOpen = {this.props.onOpen}
               noOptionsText = {noOptionsText}
               limitTags={this.props.limitTags}
               onInputChange={ this.props.onInputChange}

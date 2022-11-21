@@ -10,6 +10,8 @@ export default class FSMultiSelect extends Component {
         };
         this.autoCompleteKey = 0;
         this.onChange = this.changeValues.bind(this);
+        this.onOpen = this.onOpen.bind(this);
+        this.onClose = this.onClose.bind(this);
         this.options = [];
         this.optionsSelected = [];
         this.initialized = false;
@@ -74,6 +76,18 @@ export default class FSMultiSelect extends Component {
         }
     }
 
+    onOpen(event){
+        if(this.props.onOpen && this.props.onOpen.canExecute){
+            this.props.onOpen.execute();
+        }
+    }
+
+    onClose(event, sReason){
+        if(this.props.onClose && this.props.onClose.canExecute){
+            this.props.onClose.execute();
+        }
+    }
+
     changeValues(event, newValue, reason, details) {
         // Store response in responseAttribute and call on change action
         if(!this.isMultiSelect){
@@ -127,6 +141,8 @@ export default class FSMultiSelect extends Component {
                     options = {this.options}
                     value = {this.optionsSelected}
                     onChange = {this.onChange}
+                    onOpen = {this.onOpen}
+                    onClose = {this.onClose}
                     showCheckboxes = {this.props.showCheckboxes}
                     filterSelectedOptions={this.props.filterSelectedOptions}
                     limitTags={limitTags}
