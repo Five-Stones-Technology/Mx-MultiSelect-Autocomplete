@@ -1,5 +1,5 @@
-import { Component, createElement } from "react";
-import { AutocompleteUI } from "./components/AutocompleteUI";
+import React, { Component, createElement } from "react";
+import { FSAutocompleteUI } from "./components/AutocompleteUI";
 import "./ui/FSMultiSelect.css";
 
 export default class FSMultiSelect extends Component {
@@ -12,9 +12,13 @@ export default class FSMultiSelect extends Component {
         this.onChange = this.changeValues.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onSave = this.onSave.bind(this);
         this.options = [];
         this.optionsSelected = [];
         this.initialized = false;
+
+        this.isOpen = false;
+        this.isSaving = false;
 
         // Initialize to true to make sure data is retrieved when initializing widget
         this.refreshData = true;
@@ -77,15 +81,28 @@ export default class FSMultiSelect extends Component {
     }
 
     onOpen(event){
+        this.isOpen = true;
         if(this.props.onOpen && this.props.onOpen.canExecute){
             this.props.onOpen.execute();
         }
     }
 
     onClose(event, sReason){
-        if(this.props.onClose && this.props.onClose.canExecute){
-            this.props.onClose.execute();
+        this.isOpen = false;
+        if(!this.isSaving){
+            if(this.props.onClose && this.props.onClose.canExecute){
+                this.props.onClose.execute();
+            }
         }
+    }
+
+    onSave(){
+        this.isSaving = true;
+        if(this.props.onSave && this.props.onSave.canExecute){
+            this.props.onSave.execute();
+        }
+
+        this.isSaving = false;
     }
 
     changeValues(event, newValue, reason, details) {
@@ -133,22 +150,29 @@ export default class FSMultiSelect extends Component {
         const variant = this.props.variant ? this.props.variant.value : undefined;
         const useMultiple = this.props.multiple === true ? this.props.multiple : true;
 
-        return <AutocompleteUI 
-                    key = {this.autoCompleteKey}
-                    multiple = {useMultiple}
-                    disabled = {disabled}
-                    disableCloseOnSelect = {this.props.disableCloseOnSelect}
-                    options = {this.options}
-                    value = {this.optionsSelected}
-                    onChange = {this.onChange}
-                    onOpen = {this.onOpen}
-                    onClose = {this.onClose}
-                    showCheckboxes = {this.props.showCheckboxes}
-                    filterSelectedOptions={this.props.filterSelectedOptions}
-                    limitTags={limitTags}
-                    placeholder={placeholder}
-                    noOptionsText = {noOptionsText}
-                    variant={variant}
+        return <>
+
+        <FSAutocompleteUI 
+                key = {this.autoCompleteKey}
+                multiple = {useMultiple}
+                disabled = {disabled}
+                disableCloseOnSelect = {this.props.disableCloseOnSelect}
+                options = {this.options}
+                value = {this.optionsSelected}
+                onChange = {this.onChange}
+                onOpen = {this.onOpen}
+                onClose = {this.onClose}
+                showCheckboxes = {this.props.showCheckboxes}
+                filterSelectedOptions={this.props.filterSelectedOptions}
+                limitTags={limitTags}
+                placeholder={placeholder}
+                noOptionsText = {noOptionsText}
+                variant={variant}
+                onSave = {this.onSave}
+                showSaveButton={this.isMultiSelect && this.isOpen}
             />
+
+
+        </>
     }
 }
