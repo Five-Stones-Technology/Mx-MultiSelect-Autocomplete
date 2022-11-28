@@ -89,11 +89,18 @@ export default class FSMultiSelect extends Component {
 
     onClose(event, sReason){
         this.isOpen = false;
+        setTimeout(() => {
+            this.triggerCloseEvent();
+        }, 333);
+    }
+
+    triggerCloseEvent(){
         if(!this.isSaving){
             if(this.props.onClose && this.props.onClose.canExecute){
                 this.props.onClose.execute();
             }
         }
+        this.isSaving = false;
     }
 
     onSave(){
@@ -101,8 +108,6 @@ export default class FSMultiSelect extends Component {
         if(this.props.onSave && this.props.onSave.canExecute){
             this.props.onSave.execute();
         }
-
-        this.isSaving = false;
     }
 
     changeValues(event, newValue, reason, details) {
