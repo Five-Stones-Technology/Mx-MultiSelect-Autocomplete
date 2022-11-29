@@ -1,7 +1,11 @@
-import React, { Component, createElement } from "react";
-import { FSAutocompleteUI } from "./components/AutocompleteUI";
-import "./ui/FSMultiSelect.css";
+import React, { Component, createElement, Fragment } from "react";
 
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
+
+import "./ui/FSMultiSelect.css";
+// import { blue } from "@material-ui/core/colors";
 export default class FSMultiSelect extends Component {
     constructor(props) {
         super(props);
@@ -125,7 +129,6 @@ export default class FSMultiSelect extends Component {
             }
         }
 
-
         this.props.responseAttribute.setValue(JSON.stringify(newValue));
         this.optionsSelected = newValue;
 
@@ -152,14 +155,12 @@ export default class FSMultiSelect extends Component {
         const limitTags = this.props.limitTags > 0 ? this.props.limitTags : undefined;
         const placeholder = this.props.placeholder ? this.props.placeholder.value : "Placeholder";
         const noOptionsText = this.props.noOptionsText ? this.props.noOptionsText.value : "No Options";
-        const variant = this.props.variant ? this.props.variant.value : undefined;
-        const useMultiple = this.props.multiple === true ? this.props.multiple : true;
 
-        return <>
-
-        <FSAutocompleteUI 
+      return (
+            <Autocomplete
                 key = {this.autoCompleteKey}
-                multiple = {useMultiple}
+                multiple = {this.isMultiSelect}
+                size="small"
                 disabled = {disabled}
                 disableCloseOnSelect = {this.props.disableCloseOnSelect}
                 options = {this.options}
@@ -167,17 +168,29 @@ export default class FSMultiSelect extends Component {
                 onChange = {this.onChange}
                 onOpen = {this.onOpen}
                 onClose = {this.onClose}
-                showCheckboxes = {this.props.showCheckboxes}
                 filterSelectedOptions={this.props.filterSelectedOptions}
                 limitTags={limitTags}
                 placeholder={placeholder}
                 noOptionsText = {noOptionsText}
-                variant={variant}
-                onSave = {this.onSave}
-                showSaveButton={this.isMultiSelect && this.isOpen}
+                getOptionLabel = {option => option.title}
+                getOptionSelected={(option, value) => option.title === value.title && option.key === value.key}
+                renderOption={(option, { selected }) => (
+                    <Fragment>
+                    {this.props.showCheckboxes ? <Checkbox
+                        checked={selected}
+                    /> : null }
+                    <span class="test-font">{option.title}</span>
+                    </Fragment>
+                )}
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        className=""
+                        placeholder={placeholder}
+                    />
+                )}
             />
-
-
-        </>
+      )
     }
+
 }

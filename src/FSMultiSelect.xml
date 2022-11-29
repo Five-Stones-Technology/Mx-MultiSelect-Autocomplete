@@ -99,14 +99,6 @@
                 <caption>No Options</caption>
                 <description>Text to show when no options found</description> 
             </property>
-            <property key="variant" type="enumeration" required="true" defaultValue="standard">
-                <caption>Variant</caption>
-                <description>How the text field will be styled</description>
-                <enumerationValues>
-                    <enumerationValue key="standard">standard</enumerationValue>
-                    <enumerationValue key="outlined">outlined</enumerationValue>
-                </enumerationValues>
-            </property>
         </propertyGroup>
     </properties>
 </widget>

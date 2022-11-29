@@ -14,3 +14,12 @@
 .MuiChip-root .MuiChip-label {
     font-size: 12px;
 }
+
+.test-class {
+    background: red !important;
+}
+
+.test-font {
+color: green;
+font-size: 20px;
+}
