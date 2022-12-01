@@ -172,7 +172,6 @@ export default class FSMultiSelect extends Component {
                 limitTags={limitTags}
                 placeholder={placeholder}
                 noOptionsText = {noOptionsText}
-                getOptionLabel = {option => option.title}
                 getOptionSelected={(option, value) => option.title === value.title && option.key === value.key}
                 renderOption={(option, { selected }) => (
                     <Fragment>
