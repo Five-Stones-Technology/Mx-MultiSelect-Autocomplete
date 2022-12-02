@@ -168,6 +168,7 @@ export default class FSMultiSelect extends Component {
                 onChange = {this.onChange}
                 onOpen = {this.onOpen}
                 onClose = {this.onClose}
+                getOptionLabel={(option) => option.title ? option.title : ""}
                 filterSelectedOptions={this.props.filterSelectedOptions}
                 limitTags={limitTags}
                 placeholder={placeholder}
