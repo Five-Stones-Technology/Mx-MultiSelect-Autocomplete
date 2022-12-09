@@ -160,6 +160,7 @@ export default class FSMultiSelect extends Component {
             <Autocomplete
                 key = {this.autoCompleteKey}
                 multiple = {this.isMultiSelect}
+                className = "parent-class"
                 size="small"
                 disabled = {disabled}
                 disableCloseOnSelect = {this.props.disableCloseOnSelect}
@@ -185,7 +186,7 @@ export default class FSMultiSelect extends Component {
                 renderInput={params => (
                     <TextField
                         {...params}
-                        className=""
+                        className="auto-text-field"
                         placeholder={placeholder}
                     />
                 )}
