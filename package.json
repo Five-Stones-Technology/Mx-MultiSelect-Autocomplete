@@ -10,7 +10,7 @@
   },
   "license": "Apache-2.0",
   "config": {
-    "projectPath": "C:\\Users\\melis\\Documents\\Mendix\\ETT-main",
+    "projectPath": "C:\\Mendix Projects\\ETT-main",
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },

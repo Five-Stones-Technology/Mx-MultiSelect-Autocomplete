@@ -155,11 +155,12 @@ export default class FSMultiSelect extends Component {
         const limitTags = this.props.limitTags > 0 ? this.props.limitTags : undefined;
         const placeholder = this.props.placeholder ? this.props.placeholder.value : "Placeholder";
         const noOptionsText = this.props.noOptionsText ? this.props.noOptionsText.value : "No Options";
+        const bHardCodeMultiSelect = true;
 
       return (
             <Autocomplete
                 key = {this.autoCompleteKey}
-                multiple = {this.isMultiSelect}
+                multiple = {bHardCodeMultiSelect}
                 className = "parent-class"
                 size="small"
                 disabled = {disabled}
