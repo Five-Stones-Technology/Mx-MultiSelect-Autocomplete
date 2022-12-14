@@ -3,6 +3,8 @@ import React, { Component, createElement, Fragment } from "react";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
+import { withStyles } from "@material-ui/core/styles";
 
 import "./ui/FSMultiSelect.css";
 // import { blue } from "@material-ui/core/colors";
@@ -157,8 +159,33 @@ export default class FSMultiSelect extends Component {
         const noOptionsText = this.props.noOptionsText ? this.props.noOptionsText.value : "No Options";
         const bHardCodeMultiSelect = true;
 
+        const CustomAutocomplete = withStyles({
+            tag: {
+              backgroundColor: "#a0a",
+              height: 24,
+              position: "relative",
+              zIndex: 0,
+              "& .MuiChip-label": {
+                color: "#fff"
+              },
+              "& .MuiChip-deleteIcon": {
+                color: "red"
+              },
+              "&:after": {
+                content: '""',
+                right: 10,
+                top: 6,
+                height: 12,
+                width: 12,
+                position: "absolute",
+                backgroundColor: "white",
+                zIndex: -1
+              }
+            }
+          })(Autocomplete);
+
       return (
-            <Autocomplete
+            <CustomAutocomplete
                 key = {this.autoCompleteKey}
                 multiple = {bHardCodeMultiSelect}
                 className = "parent-class"
@@ -176,6 +203,18 @@ export default class FSMultiSelect extends Component {
                 placeholder={placeholder}
                 noOptionsText = {noOptionsText}
                 getOptionSelected={(option, value) => option.title === value.title && option.key === value.key}
+                // renderTags={(tagValue, getTagProps) => {
+                //     return tagValue.map((option, index) => (
+                //         <Chip className="test-class" {...getTagProps({ index })} label={option.title} />
+                //     ));
+                // }}
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        className="auto-text-field"
+                        placeholder={placeholder}
+                    />
+                )}
                 renderOption={(option, { selected }) => (
                     <Fragment>
                     {this.props.showCheckboxes ? <Checkbox
@@ -183,13 +222,6 @@ export default class FSMultiSelect extends Component {
                     /> : null }
                     <span class="test-font">{option.title}</span>
                     </Fragment>
-                )}
-                renderInput={params => (
-                    <TextField
-                        {...params}
-                        className="auto-text-field"
-                        placeholder={placeholder}
-                    />
                 )}
             />
       )
